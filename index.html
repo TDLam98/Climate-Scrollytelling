@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Climate Change by the Numbers</title>
+<meta name="description" content="Four questions about warming, CO2, disasters and forecasts, tested with public climate data.">
+<style>
+:root{--navy:#0B1F33;--teal:#1C7293;--orange:#E8590C;--light:#F4F7FA;--text:#1F2933;--muted:#5F6C7B;--line:#C9D3DD}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Calibri,"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--text);background:#fff;line-height:1.55;font-size:18px}
+h1,h2{font-family:Cambria,Georgia,serif;color:var(--navy);line-height:1.15;margin:0}
+.hero{background:var(--navy);color:#fff;min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 24px 0;position:relative;overflow:hidden}
+.hero h1{color:#fff;font-size:clamp(34px,7vw,64px);max-width:16em}
+.hero p{max-width:34em;color:#CADCFC;font-size:clamp(17px,2.6vw,22px);margin:18px 0 0}
+.hero .hint{margin:36px 0 28px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#CADCFC}
+.stripes{display:flex;width:100%;height:26vh;min-height:120px;margin-top:auto}
+.stripes i{flex:1;display:block}
+.story-title{max-width:1200px;margin:0 auto;padding:56px 24px 0}
+.story-title h2{font-size:clamp(26px,4vw,38px)}
+.story-title .q{color:var(--muted);margin:8px 0 0}
+.story{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"steps chart";gap:32px;max-width:1200px;margin:0 auto;padding:0 24px}
+.steps{grid-area:steps}
+.chart-wrap{grid-area:chart;position:sticky;top:0;height:100vh;display:flex;align-items:center}
+.chart-box{width:100%;background:var(--light);border:1px solid var(--line);border-radius:10px;padding:8px}
+.chart{width:100%;height:auto;display:block}
+.chart.f{animation:fade .35s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.step{min-height:85vh;display:flex;align-items:center}
+.card{background:#fff;border-left:5px solid var(--teal);padding:18px 22px;box-shadow:0 1px 12px rgba(11,31,51,.10);border-radius:0 8px 8px 0;opacity:.4;transition:opacity .3s}
+.step.active .card{opacity:1}
+.card h3{margin:0 0 6px;font-family:Cambria,Georgia,serif;color:var(--teal);font-size:20px}
+.card p{margin:0}
+.card .note{margin-top:10px;font-size:15px;color:var(--muted)}
+.outro{background:var(--navy);color:#fff;margin-top:40px;padding:64px 24px}
+.outro-in{max-width:760px;margin:0 auto}
+.outro h2{color:#fff;font-size:clamp(28px,4.5vw,42px)}
+.outro .big{color:#FFB38A;font-size:clamp(20px,3vw,26px);margin:14px 0 22px;font-family:Cambria,Georgia,serif}
+.outro ul{padding-left:20px;color:#E6EEF8}
+.outro small{display:block;margin-top:28px;color:#CADCFC;font-size:14px;line-height:1.5}
+svg text{font-family:Calibri,"Segoe UI",system-ui,sans-serif}
+.ttl{font-size:23px;font-weight:700;fill:#0B1F33}
+.tick{font-size:19px;fill:#5F6C7B}
+.lab{font-size:20px;fill:#1F2933}
+.axis .domain{stroke:#5F6C7B;stroke-width:1.5}
+.axis .tick line{stroke:#DDE3EA}
+.axis.x .tick line{display:none}
+.axis text{font-size:19px;fill:#5F6C7B}
+.axis.y .tick text{font-size:19px}
+.ann{font-size:21px;font-weight:700}
+.leg{font-size:18px;fill:#1F2933}
+.msg{font-size:22px;fill:#B2182B}
+@media (max-width:899px){
+  body{font-size:17px}
+  .story{grid-template-columns:minmax(0,1fr);grid-template-areas:"chart" "steps";gap:0;padding:0 12px}
+  .chart-wrap{height:auto;z-index:3;background:#fff;padding:8px 0}
+  .step{min-height:78vh;align-items:flex-start;padding-top:12px}
+  .hero{min-height:72vh}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chart.f{animation:none}.card{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Climate Change by the Numbers</h1>
+  <p>Four questions about warming, CO&#8322;, disasters and forecasts, tested with public data. Scroll down and the charts change as you read.</p>
+  <div class="hint">Scroll &#8595;</div>
+  <div class="stripes" id="stripes" aria-hidden="true"></div>
+</header>
+
+<section>
+  <div class="story-title"><h2>1. Has warming accelerated?</h2><p class="q">NASA GISTEMP global temperature, 1880&#8211;2025</p></div>
+  <div class="story" data-story="1">
+    <div class="steps">
+      <div class="step" data-view="temp-points"><div class="card"><h3>The long climb</h3><p>Each dot is one year's global temperature compared with the 1951&#8211;1980 average. Since 1880 the trend is clearly up. The question is whether it is going up at a steady pace.</p></div></div>
+      <div class="step" data-view="temp-fit"><div class="card"><h3>Two speeds</h3><p>A two-segment model finds a break around 1975 (95% interval 1965 to 1985). Before it, warming was about <b>0.04 &deg;C per decade</b>. After it, about <b>0.21 &deg;C per decade</b>, a difference of 0.17 (95% CI 0.13 to 0.22).</p><p class="note">The model with a break fits much better than a straight line (BIC &#8722;607 vs. &#8722;470).</p></div></div>
+    </div>
+    <div class="chart-wrap"><div class="chart-box"><svg class="chart" role="img" aria-label="Chart that changes as you scroll"></svg></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="story-title"><h2>2. How are CO&#8322; and temperature related?</h2><p class="q">NOAA Mauna Loa CO&#8322; and GISTEMP, 1959&#8211;2025</p></div>
+  <div class="story" data-story="2">
+    <div class="steps">
+      <div class="step" data-view="co2-levels"><div class="card"><h3>A near-perfect line</h3><p>Plot CO&#8322; against temperature and the points line up almost perfectly (r = 0.97). But that is mostly because both simply rise over time, so it proves little by itself.</p></div></div>
+      <div class="step" data-view="co2-changes"><div class="card"><h3>Year to year, the link is modest</h3><p>Looking at yearly <i>changes</i> removes most of the shared climb. The link is still there, but weaker: r = 0.32, or 0.39 once the leftover time trend is removed. That is about 15% of the year-to-year variation.</p><p class="note">This is association, not proof of cause. El Ni&ntilde;o years raise both CO&#8322; growth and temperature.</p></div></div>
+    </div>
+    <div class="chart-wrap"><div class="chart-box"><svg class="chart" role="img" aria-label="Chart that changes as you scroll"></svg></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="story-title"><h2>3. Are disasters becoming more frequent?</h2><p class="q">EM-DAT climate-related events, 2000&#8211;2025</p></div>
+  <div class="story" data-story="3">
+    <div class="steps">
+      <div class="step" data-view="events-total"><div class="card"><h3>About 300 to 400 a year</h3><p>EM-DAT records roughly 300&#8211;400 climate-related disasters each year since 2000. The trend is up about 3.9% per decade, but the 95% interval (&#8722;1.6% to +9.8%) includes zero, so we cannot call it a clear rise.</p></div></div>
+      <div class="step" data-view="events-hazard"><div class="card"><h3>Only storms stand out</h3><p>By type, only storms show a clear increase (+10.8% per decade, 95% CI 1.6 to 20.9), and that is one result out of five, so it could be chance.</p><p class="note">Reported damages rose about 52% per decade, but only about a third of events report a damage value, so better reporting may explain part of it.</p></div></div>
+    </div>
+    <div class="chart-wrap"><div class="chart-box"><svg class="chart" role="img" aria-label="Chart that changes as you scroll"></svg></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="story-title"><h2>4. Do forecasts and climate models hold up?</h2><p class="q">Backtest and IPCC AR6 / CMIP6 scenarios</p></div>
+  <div class="story" data-story="4">
+    <div class="steps">
+      <div class="step" data-view="scen-full"><div class="card"><h3>Same start, different futures</h3><p>A simple trend fitted to 1970&#8211;2005 predicted 2006&#8211;2025 within about 0.10 &deg;C on average, three times better than assuming warming stopped. Climate-model scenarios agree for now and fan out after about 2030, depending on emissions.</p></div></div>
+      <div class="step" data-view="scen-zoom"><div class="card"><h3>Zooming in on today</h3><p>Observed temperatures, shifted to the IPCC's 1850&#8211;1900 baseline, fell inside the 5&#8211;95% scenario ranges in 73&#8211;82% of years since 2015, about 0.02&#8211;0.05 &deg;C above the scenario averages.</p><p class="note">The three scenarios are nearly identical so far, so today's data cannot show which one we are on.</p></div></div>
+    </div>
+    <div class="chart-wrap"><div class="chart-box"><svg class="chart" role="img" aria-label="Chart that changes as you scroll"></svg></div></div>
+  </div>
+</section>
+
+<section class="outro">
+  <div class="outro-in">
+    <h2>The big picture</h2>
+    <p class="big">The temperature signal is clear. The disaster-record signal is not.</p>
+    <ul>
+      <li>Warming sped up in the mid-1970s, from about 0.04 to 0.21 &deg;C per decade.</li>
+      <li>CO&#8322; growth and temperature change are modestly linked year to year.</li>
+      <li>Disaster counts show no clear overall rise since 2000, and reporting limits what we can say.</li>
+      <li>Simple trend models forecast well, and observed warming tracks the climate-model scenarios.</li>
+    </ul>
+    <small>Data: NASA GISS GISTEMP v4; NOAA Global Monitoring Laboratory (Mauna Loa CO&#8322;); EM-DAT, CRED/UCLouvain; IPCC AR6 WGI Figure SPM.8 via CEDA. Limits: association is not causation; EM-DAT reporting changes over time; three of five scenarios shown.</small>
+  </div>
+</section>
+
+<script src="lib/d3.min.js"></script>
+<script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+<script>
+"use strict";
+/* ---------- constants ---------- */
+const NAVY="#0B1F33",TEAL="#1C7293",ORANGE="#E8590C",MUTED="#5F6C7B";
+let W=800,H=520,M={l:84,r:26,t:48,b:62};
+const isMobile=()=>matchMedia("(max-width:899px)").matches;
+const BREAK_YEAR=1975;                       // from the notebook (RQ1)
+const SCEN={"SSP1-2.6":{file:"tas_global_SSP1_2_6.csv",col:TEAL},
+            "SSP2-4.5":{file:"tas_global_SSP2_4_5.csv",col:"#E0A100"},
+            "SSP5-8.5":{file:"tas_global_SSP5_8_5.csv",col:ORANGE}};
+/* results from notebook 03 (% change per decade, 95% CI) */
+const HAZARDS=[
+  {n:"Extreme temperature",e:14.7,lo:-12.7,hi:50.7},
+  {n:"Storm",e:10.8,lo:1.6,hi:20.9},
+  {n:"Wildfire",e:7.6,lo:-14.9,hi:35.9},
+  {n:"Flood",e:-0.9,lo:-9.7,hi:8.7},
+  {n:"Drought",e:-12.8,lo:-25.9,hi:2.8},
+  {n:"All hazards",e:3.9,lo:-1.6,hi:9.8}
+];
+const D={};
+const charts=[...document.querySelectorAll("svg.chart")];
+function layout(){
+  if(isMobile()){W=520;H=420;M={l:72,r:18,t:44,b:58};}else{W=800;H=520;M={l:84,r:26,t:48,b:62};}
+  charts.forEach(c=>c.setAttribute("viewBox","0 0 "+W+" "+H));
+}
+
+/* ---------- small helpers ---------- */
+const fmt=v=>Math.abs(v)<1e-9?"0":(Math.round(v*100)/100).toString().replace("-","−");
+function corr(x,y){const mx=d3.mean(x),my=d3.mean(y);let sxy=0,sxx=0,syy=0;
+  for(let i=0;i<x.length;i++){sxy+=(x[i]-mx)*(y[i]-my);sxx+=(x[i]-mx)**2;syy+=(y[i]-my)**2;}
+  return {r:sxy/Math.sqrt(sxx*syy),slope:sxy/sxx,mx,my};}
+function solve3(A,B){const n=3,m=A.map((r,i)=>r.concat([B[i]]));
+  for(let i=0;i<n;i++){let p=i;for(let r=i+1;r<n;r++)if(Math.abs(m[r][i])>Math.abs(m[p][i]))p=r;
+    const t=m[i];m[i]=m[p];m[p]=t;
+    for(let r=i+1;r<n;r++){const f=m[r][i]/m[i][i];for(let c=i;c<=n;c++)m[r][c]-=f*m[i][c];}}
+  const x=[0,0,0];for(let i=n-1;i>=0;i--){let s=m[i][n];for(let c=i+1;c<n;c++)s-=m[i][c]*x[c];x[i]=s/m[i][i];}return x;}
+function hingeFit(xs,ys,k){const mx=d3.mean(xs),A=[[0,0,0],[0,0,0],[0,0,0]],B=[0,0,0];
+  xs.forEach((v,i)=>{const r=[1,v-mx,Math.max(0,v-k)];for(let a=0;a<3;a++){B[a]+=r[a]*ys[i];for(let b=0;b<3;b++)A[a][b]+=r[a]*r[b];}});
+  const be=solve3(A,B);return {pre:be[1],post:be[1]+be[2],f:v=>be[0]+be[1]*(v-mx)+be[2]*Math.max(0,v-k)};}
+
+/* ---------- D3 drawing helpers ---------- */
+function frame(S,xd,yd,xl,yl,title,o){o=o||{};
+  const x=d3.scaleLinear(xd,[M.l,W-M.r]),y=d3.scaleLinear(yd,[H-M.b,M.t]);
+  S.append("text").attr("class","ttl").attr("x",M.l).attr("y",28).text(title);
+  S.append("g").attr("class","axis y").attr("transform","translate("+M.l+",0)")
+    .call(d3.axisLeft(y).ticks(5).tickValues(o.yt||null).tickSizeInner(-(W-M.l-M.r)).tickSizeOuter(0).tickPadding(10).tickFormat(fmt));
+  S.append("g").attr("class","axis x").attr("transform","translate(0,"+(H-M.b)+")")
+    .call(d3.axisBottom(x).ticks(6).tickValues(o.xt||null).tickSize(0).tickPadding(12).tickFormat(fmt));
+  S.append("text").attr("class","lab").attr("x",(M.l+W-M.r)/2).attr("y",H-12).attr("text-anchor","middle").text(xl);
+  S.append("text").attr("class","lab").attr("transform","translate(16 "+((M.t+H-M.b)/2)+") rotate(-90)").attr("text-anchor","middle").text(yl);
+  return {x:x,y:y};}
+function dots(S,pts,x,y,col,r){
+  S.append("g").selectAll("circle").data(pts).join("circle")
+    .attr("cx",d=>x(d[0])).attr("cy",d=>y(d[1])).attr("fill",col).attr("opacity",.75).attr("r",0)
+    .transition().duration(450).delay((d,i)=>Math.min(i*3,500)).attr("r",r||4);}
+function line(S,pts,x,y,col,w,o){o=o||{};
+  const p=S.append("path").datum(pts).attr("fill","none").attr("stroke",col).attr("stroke-width",w||3)
+    .attr("d",d3.line().x(d=>x(d[0])).y(d=>y(d[1])));
+  if(o.dash)p.attr("stroke-dasharray",o.dash);
+  else if(o.draw){const L=p.node().getTotalLength();p.attr("stroke-dasharray",L).attr("stroke-dashoffset",L)
+    .transition().delay(o.delay||0).duration(900).ease(d3.easeCubicOut).attr("stroke-dashoffset",0);}
+  return p;}
+function band(S,s,x,y,col){
+  S.append("path").datum(s).attr("fill",col).attr("opacity",.2)
+    .attr("d",d3.area().x(d=>x(d.year)).y0(d=>y(d.lo)).y1(d=>y(d.hi)));
+  line(S,s.map(d=>[d.year,d.mean]),x,y,col,3);}
+function legend(S,items,x0,y0){
+  items.forEach((it,i)=>{const yy=y0+i*26;
+    S.append("line").attr("x1",x0).attr("x2",x0+30).attr("y1",yy).attr("y2",yy).attr("stroke",it[1]).attr("stroke-width",4);
+    S.append("text").attr("class","leg").attr("x",x0+38).attr("y",yy+6).text(it[0]);});}
+function missing(S,names){
+  S.append("text").attr("class","msg").attr("x",W/2).attr("y",H/2).attr("text-anchor","middle").text("Missing data file: "+names);
+  S.append("text").attr("class","tick").attr("x",W/2).attr("y",H/2+30).attr("text-anchor","middle").text("Copy it into the data folder (see README)");}
+
+/* ---------- views ---------- */
+const VIEWS={
+ "temp-points"(S){
+  if(!D.temp)return missing(S,"annual_temp_co2.csv");
+  const t=D.temp.filter(r=>r.temp_anom!=null),f=frame(S,[1875,2030],[-0.6,1.4],"Year","Anomaly vs. 1951–80 (°C)","Global temperature, one dot per year",{xt:[1880,1920,1960,2000]});
+  dots(S,t.map(r=>[r.year,r.temp_anom]),f.x,f.y,MUTED,4.5);},
+ "temp-fit"(S){
+  if(!D.temp)return missing(S,"annual_temp_co2.csv");
+  const t=D.temp.filter(r=>r.temp_anom!=null),xs=t.map(r=>r.year),ys=t.map(r=>r.temp_anom),h=hingeFit(xs,ys,BREAK_YEAR),
+   f=frame(S,[1875,2030],[-0.6,1.4],"Year","Anomaly vs. 1951–80 (°C)","Warming sped up around "+BREAK_YEAR,{xt:[1880,1920,1960,2000]}),a=xs[0],b=xs[xs.length-1];
+  dots(S,t.map(r=>[r.year,r.temp_anom]),f.x,f.y,MUTED,4);
+  S.append("line").attr("x1",f.x(BREAK_YEAR)).attr("x2",f.x(BREAK_YEAR)).attr("y1",M.t).attr("y2",H-M.b).attr("stroke",ORANGE).attr("stroke-dasharray","6 5").attr("stroke-width",2);
+  line(S,[[a,h.f(a)],[BREAK_YEAR,h.f(BREAK_YEAR)]],f.x,f.y,ORANGE,5,{draw:true});
+  line(S,[[BREAK_YEAR,h.f(BREAK_YEAR)],[b,h.f(b)]],f.x,f.y,ORANGE,5,{draw:true,delay:700});
+  S.append("text").attr("class","ann").attr("x",f.x(1884)).attr("y",f.y(0.95)).attr("fill",NAVY).text("Before: "+(h.pre*10).toFixed(2)+" °C/decade");
+  S.append("text").attr("class","ann").attr("x",f.x(1884)).attr("y",f.y(0.95)+28).attr("fill",ORANGE).text("After: "+(h.post*10).toFixed(2)+" °C/decade");},
+ "co2-levels"(S){
+  if(!D.temp)return missing(S,"annual_temp_co2.csv");
+  const t=D.temp.filter(r=>r.temp_anom!=null&&r.co2_ppm!=null);
+  if(!t.length)return missing(S,"co2_ppm column in annual_temp_co2.csv");
+  const c=corr(t.map(r=>r.co2_ppm),t.map(r=>r.temp_anom)),
+   f=frame(S,[310,430],[-0.2,1.4],"CO₂ (ppm)","Temperature anomaly (°C)","Levels: r = "+c.r.toFixed(2)+" (both just rise over time)");
+  dots(S,t.map(r=>[r.co2_ppm,r.temp_anom]),f.x,f.y,TEAL,5);},
+ "co2-changes"(S){
+  if(!D.temp)return missing(S,"annual_temp_co2.csv");
+  const t=D.temp.filter(r=>r.temp_anom!=null&&r.co2_ppm!=null).sort((a,b)=>a.year-b.year),dC=[],dT=[];
+  for(let i=1;i<t.length;i++){dC.push(t[i].co2_ppm-t[i-1].co2_ppm);dT.push(t[i].temp_anom-t[i-1].temp_anom);}
+  if(!dC.length)return missing(S,"co2_ppm column in annual_temp_co2.csv");
+  const c=corr(dC,dT),f=frame(S,[0,4],[-0.35,0.35],"Yearly CO₂ change (ppm/yr)","Yearly temperature change (°C)","Yearly changes: r = "+c.r.toFixed(2),{yt:[-0.3,-0.15,0,0.15,0.3]}),
+   yl=v=>c.my+c.slope*(v-c.mx);
+  dots(S,dC.map((v,i)=>[v,dT[i]]),f.x,f.y,TEAL,5);
+  line(S,[[0.4,yl(0.4)],[3.6,yl(3.6)]],f.x,f.y,ORANGE,4,{draw:true,delay:400});},
+ "events-total"(S){
+  if(!D.events)return missing(S,"emdat_yearly_counts.csv");
+  const e=D.events.filter(r=>r.year>=2000),f=frame(S,[1999,2026],[0,450],"Year","Events per year","Climate-related disasters (EM-DAT)",{xt:[2000,2005,2010,2015,2020,2025]}),
+   bw=(f.x(2001)-f.x(2000))*0.78;
+  S.append("g").selectAll("rect").data(e).join("rect").attr("fill","#7FB0C4").attr("x",d=>f.x(d.year)-bw/2).attr("width",bw)
+    .attr("y",f.y(0)).attr("height",0).transition().duration(600).delay((d,i)=>i*15).attr("y",d=>f.y(d.total)).attr("height",d=>f.y(0)-f.y(d.total));},
+ "events-hazard"(S){
+  const mob=W<600,l=mob?150:190,top=62,x=d3.scaleLinear([-35,60],[l,W-M.r]),y=d3.scaleBand(HAZARDS.map(h=>h.n),[top,H-M.b]);
+  S.append("text").attr("class","ttl").attr("x",M.l).attr("y",28).text("Change in counts, % per decade (95% CI)");
+  S.append("g").attr("class","axis x").attr("transform","translate(0,"+(H-M.b)+")")
+    .call(d3.axisBottom(x).tickValues([-30,-20,-10,0,10,20,30,40,50,60].filter((v,i)=>!mob||i%2===1||v===0)).tickSizeInner(-(H-M.b-top)).tickSizeOuter(0).tickPadding(10).tickFormat(fmt))
+    .call(g=>g.select(".domain").remove());
+  S.append("line").attr("x1",x(0)).attr("x2",x(0)).attr("y1",top).attr("y2",H-M.b).attr("stroke",MUTED).attr("stroke-width",1.5);
+  S.append("text").attr("class","lab").attr("x",(l+W-M.r)/2).attr("y",H-12).attr("text-anchor","middle").text("% change per decade");
+  const col=h=>h.n==="Storm"?ORANGE:(h.n==="All hazards"?NAVY:TEAL),g=S.append("g").selectAll("g").data(HAZARDS).join("g")
+    .attr("transform",h=>"translate(0,"+(y(h.n)+y.bandwidth()/2)+")").attr("opacity",0);
+  g.append("text").attr("class","lab").attr("x",l-12).attr("y",6).attr("text-anchor","end").attr("font-weight",h=>h.n==="All hazards"?700:400)
+    .text(h=>mob&&h.n==="Extreme temperature"?"Extreme temp.":h.n);
+  g.append("line").attr("x1",h=>x(h.lo)).attr("x2",h=>x(h.hi)).attr("stroke",col).attr("stroke-width",4);
+  g.append("line").attr("x1",h=>x(h.lo)).attr("x2",h=>x(h.lo)).attr("y1",-8).attr("y2",8).attr("stroke",col).attr("stroke-width",3);
+  g.append("line").attr("x1",h=>x(h.hi)).attr("x2",h=>x(h.hi)).attr("y1",-8).attr("y2",8).attr("stroke",col).attr("stroke-width",3);
+  g.append("circle").attr("cx",h=>x(h.e)).attr("r",8).attr("fill",col);
+  g.transition().duration(500).delay((h,i)=>i*90).attr("opacity",1);},
+ "scen-full"(S){scen(S,false);},
+ "scen-zoom"(S){scen(S,true);}
+};
+function scen(S,zoom){
+  if(!D.temp)return missing(S,"annual_temp_co2.csv");
+  const names=Object.keys(SCEN).filter(k=>D.scen&&D.scen[k]);
+  if(!names.length)return missing(S,"tas_global_SSP*.csv");
+  const base=D.temp.filter(r=>r.year>=1995&&r.year<=2014&&r.temp_anom!=null).map(r=>r.temp_anom),off=0.85-d3.mean(base),
+   obs=D.temp.filter(r=>r.temp_anom!=null).map(r=>({year:r.year,v:r.temp_anom+off})),
+   f=zoom?frame(S,[2010,2030],[0.8,2.0],"Year","°C above 1850–1900","Observed vs. scenario ranges, 2010–2030",{xt:[2010,2015,2020,2025,2030]})
+         :frame(S,[1950,2100],[0,6.3],"Year","°C above 1850–1900","Observed warming and three scenarios",{xt:[1950,2000,2050,2100]}),
+   x0=zoom?2010:1950,x1=zoom?2030:2100;
+  names.forEach(k=>band(S,D.scen[k].filter(r=>r.year<=x1),f.x,f.y,SCEN[k].col));
+  const o=obs.filter(r=>r.year>=x0);
+  line(S,o.map(r=>[r.year,r.v]),f.x,f.y,"#000",zoom?3:4,{draw:true});
+  if(zoom)dots(S,o.map(r=>[r.year,r.v]),f.x,f.y,"#000",5);
+  legend(S,names.map(k=>[k,SCEN[k].col]).concat([["Observed (annual)","#000"]]),M.l+14,M.t+22);}
+
+/* ---------- show a view ---------- */
+function show(svgEl,name){
+  if(!name||svgEl.dataset.view===name)return;svgEl.dataset.view=name;
+  const S=d3.select(svgEl);S.selectAll("*").remove();VIEWS[name](S);
+  svgEl.classList.remove("f");void svgEl.getBoundingClientRect();svgEl.classList.add("f");}
+
+/* ---------- scrolling (Scrollama, with a built-in fallback) ---------- */
+const steps=[...document.querySelectorAll(".step")],wraps=[...document.querySelectorAll(".chart-wrap")];
+function activate(el){
+  steps.forEach(s=>s.classList.remove("active"));el.classList.add("active");
+  show(el.closest(".story").querySelector("svg.chart"),el.dataset.view);}
+// Where the "trigger line" sits, as a share of the window height.
+function triggerOffset(){
+  if(!isMobile())return 0.5;
+  const ch=wraps[0].getBoundingClientRect().height||260;
+  return Math.min(0.9,(ch+100)/innerHeight);}
+let scroller=null,fallbackIO=null;
+function startScroller(){
+  if(window.scrollama){
+    scroller=scrollama();
+    scroller.setup({step:".step",offset:triggerOffset()}).onStepEnter(r=>activate(r.element));
+    return;}
+  // Fallback if the Scrollama script could not be loaded (for example, offline)
+  const mk=()=>{
+    if(fallbackIO)fallbackIO.disconnect();
+    const off=triggerOffset(),top=Math.round(off*innerHeight);
+    fallbackIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)activate(e.target);}),
+      {rootMargin:"-"+top+"px 0px -"+Math.max(0,innerHeight-top-2)+"px 0px"});
+    steps.forEach(s=>fallbackIO.observe(s));};
+  mk();scroller={offset:mk,resize:mk};}
+let wasMobile=null;
+addEventListener("resize",()=>{
+  if(!scroller)return;
+  if(scroller.offset&&window.scrollama)scroller.offset(triggerOffset());
+  if(scroller.resize)scroller.resize();
+  if(wasMobile!==isMobile()){wasMobile=isMobile();layout();charts.forEach(c=>{const v=c.dataset.view;c.dataset.view="";if(v)show(c,v);});}});
+
+/* ---------- data ---------- */
+const tryCsv=u=>d3.csv(u,d3.autoType).catch(()=>null);
+const stripeColor=d3.scaleSequential(d3.interpolateRgbBasis(["#08306B","#2171B5","#6BAED6","#C6DBEF","#FDD0A2","#FD8D3C","#E6550D","#B2182B"])).domain([-0.6,1.3]).clamp(true);
+(async function(){
+  D.temp=await tryCsv("data/annual_temp_co2.csv");
+  D.events=await tryCsv("data/emdat_yearly_counts.csv");
+  D.scen={};
+  for(const k of Object.keys(SCEN)){const raw=await tryCsv("data/"+SCEN[k].file);
+    if(raw)D.scen[k]=raw.map(r=>({year:r.Year,lo:r["5%"],mean:r.Mean,hi:r["95%"]})).filter(r=>r.year!=null&&r.mean!=null);}
+  if(D.temp){d3.select("#stripes").selectAll("i").data(D.temp.filter(r=>r.temp_anom!=null)).join("i").style("background",r=>stripeColor(r.temp_anom));}
+  wasMobile=isMobile();layout();
+  document.querySelectorAll(".story").forEach(st=>show(st.querySelector("svg.chart"),st.querySelector(".step").dataset.view));
+  startScroller();
+})();
+</script>
+</body>
+</html>
